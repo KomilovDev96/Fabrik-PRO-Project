@@ -78,4 +78,12 @@ export const cashboxApi = {
   remove: async (id: ID): Promise<void> => {
     await httpClient.delete(`${RESOURCE}/${id}`)
   },
+
+  /** Cash boxes as <Select> options (id + title). Used by finance forms. */
+  options: async (search?: string): Promise<{ value: number; label: string }[]> => {
+    const res = await httpClient.get<RawList | CashBox[]>(RESOURCE, {
+      params: { Page: 1, Limit: 100, Search: search || undefined },
+    })
+    return pickItems(res.data).map((x) => ({ value: x.id, label: x.title || `#${x.id}` }))
+  },
 }

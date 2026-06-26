@@ -1,0 +1,1 @@
+export { KirimBuyurtmalarPage } from './KirimBuyurtmalarPage'

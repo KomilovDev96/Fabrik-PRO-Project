@@ -22,6 +22,15 @@ export function useOrders(params: OrderListParams) {
   })
 }
 
+/** Order options for the client-payment picker. Cached 1 min. */
+export function useOrderOptions(search?: string) {
+  return useQuery({
+    queryKey: ['orders', 'options', search ?? ''],
+    queryFn: () => orderApi.options(search),
+    staleTime: 60_000,
+  })
+}
+
 /** Single order detail (used to prefill the edit form). */
 export function useOrder(id: ID | undefined) {
   return useQuery<OrderDetail, ApiError>({

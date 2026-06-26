@@ -12,6 +12,7 @@ export { getCashBoxColumns } from './ui/cashboxColumns'
 export {
   cashboxKeys,
   useCashBoxes,
+  useCashBoxOptions,
   useCashBox,
   useCreateCashBox,
   useUpdateCashBox,

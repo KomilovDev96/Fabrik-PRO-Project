@@ -87,4 +87,12 @@ export const orderApi = {
   removeMany: async (ids: ID[]): Promise<void> => {
     await httpClient.delete(RESOURCE, { params: { ids }, paramsSerializer: { indexes: null } })
   },
+
+  /** Orders as <Select> options (id + client). Used by the client-payment form. */
+  options: async (search?: string): Promise<{ value: number; label: string }[]> => {
+    const res = await httpClient.get<RawList | Order[]>(RESOURCE, {
+      params: { Page: 1, Limit: 100, Search: search || undefined },
+    })
+    return pickItems(res.data).map((o) => ({ value: o.id, label: `#${o.id}${o.client ? ` — ${o.client}` : ''}` }))
+  },
 }

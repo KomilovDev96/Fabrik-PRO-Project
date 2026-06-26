@@ -22,6 +22,15 @@ export function useCashBoxes(params: ListParams) {
   })
 }
 
+/** Cash-box options for finance pickers. Cached 1 min. */
+export function useCashBoxOptions(search?: string) {
+  return useQuery({
+    queryKey: ['cashboxes', 'options', search ?? ''],
+    queryFn: () => cashboxApi.options(search),
+    staleTime: 60_000,
+  })
+}
+
 /** Single cash box (used to prefill the edit form). */
 export function useCashBox(id: ID | undefined) {
   return useQuery({

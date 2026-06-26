@@ -1,0 +1,1 @@
+export { PulKirimPage } from './PulKirimPage'

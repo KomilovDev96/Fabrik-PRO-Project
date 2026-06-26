@@ -1,0 +1,1 @@
+export { TolovlarPage } from './TolovlarPage'

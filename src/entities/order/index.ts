@@ -16,6 +16,7 @@ export { getOrderColumns } from './ui/orderColumns'
 export {
   orderKeys,
   useOrders,
+  useOrderOptions,
   useOrder,
   useCreateOrder,
   useUpdateOrder,

@@ -1,0 +1,1 @@
+export { PulChiqimPage } from './PulChiqimPage'

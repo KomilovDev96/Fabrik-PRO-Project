@@ -21,6 +21,40 @@ const AccessoriesPage = lazy(() =>
 const ClientsPage = lazy(() => import('@/pages/clients').then((m) => ({ default: m.ClientsPage })))
 const CashBoxPage = lazy(() => import('@/pages/cashbox').then((m) => ({ default: m.CashBoxPage })))
 const SalesPage = lazy(() => import('@/pages/sales').then((m) => ({ default: m.SalesPage })))
+const PayrollLedgerPage = lazy(() =>
+  import('@/pages/payroll').then((m) => ({ default: m.PayrollLedgerPage })),
+)
+const UsersPage = lazy(() => import('@/pages/users').then((m) => ({ default: m.UsersPage })))
+const AttendancePage = lazy(() =>
+  import('@/pages/attendance').then((m) => ({ default: m.AttendancePage })),
+)
+const SickLeavePage = lazy(() =>
+  import('@/pages/sick-leave').then((m) => ({ default: m.SickLeavePage })),
+)
+const SuppliersPage = lazy(() =>
+  import('@/pages/suppliers').then((m) => ({ default: m.SuppliersPage })),
+)
+const ProductsPage = lazy(() => import('@/pages/products').then((m) => ({ default: m.ProductsPage })))
+const SettingsPage = lazy(() => import('@/pages/settings').then((m) => ({ default: m.SettingsPage })))
+const PulKirimPage = lazy(() => import('@/pages/pul-kirim').then((m) => ({ default: m.PulKirimPage })))
+const PulChiqimPage = lazy(() =>
+  import('@/pages/pul-chiqim').then((m) => ({ default: m.PulChiqimPage })),
+)
+const KpiPage = lazy(() => import('@/pages/kpi').then((m) => ({ default: m.KpiPage })))
+const ProductionPage = lazy(() =>
+  import('@/pages/production').then((m) => ({ default: m.ProductionPage })),
+)
+const SalaryAccrualPage = lazy(() =>
+  import('@/pages/salary-accrual').then((m) => ({ default: m.SalaryAccrualPage })),
+)
+const TolovlarPage = lazy(() => import('@/pages/tolovlar').then((m) => ({ default: m.TolovlarPage })))
+const ProductModelPage = lazy(() =>
+  import('@/pages/product-model').then((m) => ({ default: m.ProductModelPage })),
+)
+const RbacPage = lazy(() => import('@/pages/rbac').then((m) => ({ default: m.RbacPage })))
+const KirimBuyurtmalarPage = lazy(() =>
+  import('@/pages/kirim-buyurtmalar').then((m) => ({ default: m.KirimBuyurtmalarPage })),
+)
 const ModulePlaceholder = lazy(() =>
   import('@/pages/ModulePlaceholder').then((m) => ({ default: m.ModulePlaceholder })),
 )
@@ -56,6 +90,46 @@ function renderModulePage(routeKey: string): ReactNode {
       return <CashBoxPage />
     case ROUTES.sales:
       return <SalesPage />
+    case ROUTES.salary:
+      return <PayrollLedgerPage kind="salary" />
+    case ROUTES.advance:
+      return <PayrollLedgerPage kind="advance" />
+    case ROUTES.penalty:
+      return <PayrollLedgerPage kind="penalty" />
+    case ROUTES.bonus:
+      return <PayrollLedgerPage kind="bonus" />
+    case ROUTES.users:
+      return <UsersPage variant="foydalanuvchilar" />
+    case ROUTES.employees:
+      return <UsersPage variant="xodimlar" />
+    case ROUTES.attendance:
+      return <AttendancePage />
+    case ROUTES.sickLeave:
+      return <SickLeavePage />
+    case ROUTES.suppliers:
+      return <SuppliersPage />
+    case ROUTES.products:
+      return <ProductsPage />
+    case ROUTES.settings:
+      return <SettingsPage />
+    case ROUTES.pulKirim:
+      return <PulKirimPage />
+    case ROUTES.pulChiqim:
+      return <PulChiqimPage />
+    case ROUTES.kpi:
+      return <KpiPage />
+    case ROUTES.production:
+      return <ProductionPage />
+    case ROUTES.salaryAccrual:
+      return <SalaryAccrualPage />
+    case ROUTES.payments:
+      return <TolovlarPage />
+    case ROUTES.productModel:
+      return <ProductModelPage />
+    case ROUTES.roles:
+      return <RbacPage />
+    case ROUTES.orders:
+      return <KirimBuyurtmalarPage />
     default:
       return <ModulePlaceholder />
   }

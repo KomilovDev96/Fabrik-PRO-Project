@@ -1,0 +1,1 @@
+export { ProductModelPage } from './ProductModelPage'
