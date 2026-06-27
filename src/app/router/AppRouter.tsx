@@ -149,7 +149,8 @@ export function AppRouter() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to={ROUTES.dashboard} replace />} />
+        {/* Dashboard is hidden — land on Mijozlar (clients) instead. */}
+        <Route index element={<Navigate to={ROUTES.clients} replace />} />
 
         {/* One route per module, each guarded by its `view` permission. */}
         {ALL_NAV_ITEMS.map((item) => (
