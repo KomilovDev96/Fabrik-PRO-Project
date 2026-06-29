@@ -28,9 +28,20 @@ PRs and `workflow_dispatch` run **build only** (no deploy).
   current  → releases/<latest>   ← nginx root points here
 ```
 
-nginx serves on **port 8081** (`http://<server-ip>:8081`). `/api/v1/*` is proxied
-to `http://46.225.154.145`, keeping the prefix (same as the dev Vite proxy), so
-`VITE_API_BASE_URL` stays empty in prod.
+nginx serves the static SPA on **port 8081** (`http://<server-ip>:8081`).
+
+**API in prod:** the browser talks to the backend **directly** at
+`http://46.225.154.145` (baked into the build via `VITE_API_BASE_URL`). The
+backend sends `Access-Control-Allow-Origin: *`, so CORS is fine. We do **not**
+use the nginx `/api` proxy: the UZ DPI filter blocks plain-HTTP `/api` on the
+server→backend hop (returns an `ogohlantirish.uz` block page). The `location
+/api/` block is kept in the nginx config but unused — it becomes useful again
+once the backend is reachable over HTTPS.
+
+> Caveat: this works while the frontend is served over **HTTP**. When the
+> frontend moves to HTTPS, calling an HTTP backend = mixed-content blocked — at
+> that point put the backend behind HTTPS (a domain + cert) and point
+> `VITE_API_BASE_URL` at it (or revive the nginx proxy over HTTPS).
 
 ## One-time setup
 
@@ -61,7 +72,7 @@ override the build defaults:
 
 | Variable | Default | Notes |
 | --- | --- | --- |
-| `VITE_API_BASE_URL` | empty | leave empty to use the nginx `/api` proxy |
+| `VITE_API_BASE_URL` | `http://46.225.154.145` | browser calls the backend directly; set to an HTTPS API origin when you have one |
 | `VITE_DEFAULT_LOCALE` | `ru` | |
 | `VITE_APP_NAME` | `Fabric PRO` | |
 
